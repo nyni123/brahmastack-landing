@@ -9,7 +9,6 @@ export type EnquiryState = {
 
 /**
  * Builds a plain-text + HTML email body from form data fields.
- * @author Cursor
  */
 function buildEmailBody(fields: Record<string, string>): {
   text: string;
@@ -49,7 +48,6 @@ function buildEmailBody(fields: Record<string, string>): {
 
 /**
  * Server action: validates form data and sends an enquiry email via SMTP.
- * @author Cursor
  */
 export async function sendEnquiry(
   _prev: EnquiryState,

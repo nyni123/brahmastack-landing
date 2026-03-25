@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ContactSection } from "@/components/ContactSection";
 
-/* @author Cursor */
 const FEATURED_PROJECTS = [
   { cat: "CRM Software",            name: "My Client Wave",  icon: "📊", cls: "wt2", img: "/myclientwav/myclientwav.png", url: "https://myclientwave.com/" },
   { cat: "Online Store",            name: "Pick n Melt",     icon: "🛍️", cls: "wt3", img: "/picknmelt/picknmelt.png",    url: "https://www.picknmelt.com/" },

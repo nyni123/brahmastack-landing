@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   description: "Terms and conditions for Brahma Stack Technologies.",
 };
 
-/**
- * @author Cursor
- */
 export default function TermsPage() {
   return (
     <article className="page-inner">

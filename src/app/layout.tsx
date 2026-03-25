@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
@@ -13,8 +13,15 @@ const plusJakarta = Plus_Jakarta_Sans({
 const SITE_URL = "https://brahmastack.com";
 
 /**
+ * Viewport config — dark theme-color for mobile browser chrome.
+ * Next.js auto-adds width=device-width, initial-scale=1 by default.
+ */
+export const viewport: Viewport = {
+  themeColor: "#0c0c0c",
+};
+
+/**
  * Root metadata — shared across all pages unless overridden.
- * @author Cursor
  */
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -81,7 +88,6 @@ export const metadata: Metadata = {
 
 /**
  * JSON-LD structured data — helps Google understand the business.
- * @author Cursor
  */
 const jsonLd = {
   "@context": "https://schema.org",

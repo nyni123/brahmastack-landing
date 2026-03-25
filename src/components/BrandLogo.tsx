@@ -13,7 +13,6 @@ type BrandLogoProps = {
 
 /**
  * Brahma Stack wordmark + monogram from `public/main-logo.png`.
- * @author Cursor
  */
 export function BrandLogo({ width, height, alt, priority }: BrandLogoProps) {
   return (

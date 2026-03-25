@@ -79,7 +79,6 @@ const REVIEWS = [
 
 /**
  * Renders a row of filled star icons for a given count.
- * @author Cursor
  */
 function Stars({ count }: { count: number }) {
   return (
@@ -94,7 +93,6 @@ function Stars({ count }: { count: number }) {
 /**
  * Testimonials page — redesigned with dark hero, masonry card grid,
  * star ratings, avatar initials, and a closing CTA band.
- * @author Cursor
  */
 export default function TestimonialsPage() {
   return (

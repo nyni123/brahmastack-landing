@@ -7,7 +7,6 @@ type FormStatus = "idle" | "sending" | "success" | "error";
 /**
  * Contact block + demo form (shared by home and /contact).
  * Submits via AJAX to /api/send-enquiry — no page reload.
- * @author Cursor
  */
 export function ContactSection() {
   const [status, setStatus] = useState<FormStatus>("idle");

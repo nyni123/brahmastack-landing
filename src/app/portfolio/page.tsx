@@ -106,7 +106,6 @@ const OTHER_PROJECTS: OtherProject[] = [
 
 /**
  * Portfolio page — featured project hero + project grid with details.
- * @author Cursor
  */
 export default function PortfolioPage() {
   return (

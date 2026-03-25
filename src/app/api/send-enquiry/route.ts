@@ -3,7 +3,6 @@ import nodemailer from "nodemailer";
 
 /**
  * Builds plain-text + HTML email body from enquiry fields.
- * @author Cursor
  */
 function buildEmailBody(fields: Record<string, string>) {
   const { name, email, phone, service, details } = fields;
@@ -40,7 +39,6 @@ function buildEmailBody(fields: Record<string, string>) {
 
 /**
  * POST /api/send-enquiry — receives form data as JSON, sends email via SMTP.
- * @author Cursor
  */
 export async function POST(req: NextRequest) {
   try {

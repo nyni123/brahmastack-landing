@@ -44,7 +44,6 @@ const STATS = [
 
 /**
  * About page — mission, stats, why-us grid, CTA.
- * @author Cursor
  */
 export default function AboutPage() {
   return (

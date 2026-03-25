@@ -5,9 +5,6 @@ export const metadata: Metadata = {
   description: "Privacy policy for Brahma Stack Technologies.",
 };
 
-/**
- * @author Cursor
- */
 export default function PrivacyPage() {
   return (
     <article className="page-inner">

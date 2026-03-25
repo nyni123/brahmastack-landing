@@ -75,7 +75,6 @@ const SERVICES = [
 
 /**
  * Services page — compact header, immediate 3×2 card grid, process + CTA.
- * @author Cursor
  */
 export default function ServicesPage() {
   return (

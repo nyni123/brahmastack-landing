@@ -4,18 +4,23 @@ import { SiteFooter } from "@/components/SiteFooter";
 
 /**
  * Shared chrome: announcement bar, nav, main content, footer.
- * @author Cursor
  */
 export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className="announce-bar">
         <span className="announce-dot" />
-        <span className="announce-text">
+        {/* Full text shown on desktop */}
+        <span className="announce-text announce-text--desktop">
           We build our own production tools —{" "}
           <strong className="announce-highlight">in-house e-signature platform</strong>{" "}
           <span className="announce-badge">like DocuSign</span>{" "}
           available for your project.
+        </span>
+        {/* Condensed text shown on mobile */}
+        <span className="announce-text announce-text--mobile">
+          <strong className="announce-highlight">In-house e-signature</strong>{" "}
+          <span className="announce-badge">like DocuSign</span>
         </span>
         <Link href="/#inhouse" className="announce-link">
           See it live →

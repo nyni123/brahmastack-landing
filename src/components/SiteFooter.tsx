@@ -3,7 +3,6 @@ import { BrandLogo } from "@/components/BrandLogo";
 
 /**
  * Site footer with sitemap-style links (mirrors brahmastack.com structure).
- * @author Cursor
  */
 export function SiteFooter() {
   return (

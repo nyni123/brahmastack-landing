@@ -133,10 +133,26 @@ nav {
   color: var(--gray);
   font-size: 0.8rem;
   font-weight: 600;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   user-select: none;
+  /* Improved tap target for mobile */
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.nav-mobile-summary:hover {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+details[open] .nav-mobile-summary {
+  color: var(--orange);
+  border-color: var(--orange-border);
 }
 
 .nav-mobile-summary::-webkit-details-marker {
@@ -234,11 +250,13 @@ nav {
   background: linear-gradient(90deg, #1a1200, #1f1500, #1a1200);
   border-bottom: 1px solid rgba(245,166,35,0.25);
   padding: 10px 5%;
+  /* Fixed height ensures nav top:42px always aligns correctly across all viewports */
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   text-align: center;
 }
 
@@ -261,6 +279,10 @@ nav {
   color: rgba(255,255,255,0.7);
   line-height: 1.5;
 }
+
+/* Mobile text hidden by default; desktop text shown */
+.announce-text--mobile { display: none; }
+.announce-text--desktop { display: inline; }
 
 .announce-highlight {
   color: #fff;
@@ -299,9 +321,26 @@ nav {
   background: rgba(245,166,35,0.15);
 }
 
-@media (max-width: 560px) {
-  .announce-bar { gap: 6px; padding: 8px 4%; }
+/* At tablet/mobile widths switch to compact text to prevent the bar from
+   ever growing taller than the fixed 42px height and misaligning the nav */
+@media (max-width: 900px) {
+  .announce-bar {
+    gap: 8px;
+    padding: 0 4%;
+    justify-content: space-between;
+  }
   .announce-dot { display: none; }
+  .announce-text--desktop { display: none; }
+  .announce-text--mobile { display: inline; }
+}
+
+/* Further font-size tuning on small phones */
+@media (max-width: 560px) {
+  .announce-bar { gap: 6px; padding: 0 3%; }
+  .announce-text { font-size: 0.78rem; }
+  .announce-highlight { font-size: 0.8rem; }
+  .announce-badge { font-size: 0.66rem; padding: 2px 6px; }
+  .announce-link { font-size: 0.74rem; padding: 4px 9px; flex-shrink: 0; }
 }
 
 /* Inner pages (about, services, etc.) */
@@ -1656,11 +1695,23 @@ nav {
 }
 
 .page-contact-section {
+  /* On home page this section follows other sections — no extra top padding needed.
+     The #contact ID rule (padding: 100px 6%) handles it via specificity. */
   padding-top: 0;
 }
 
-.page-contact-wrapper .page-contact-section {
+/* Standalone /contact page: first element must clear the fixed header
+   (42px announce bar + 64px nav = 106px). Combined ID+class beats #contact alone. */
+.page-contact-wrapper #contact {
+  padding-top: 110px;
   padding-bottom: 56px;
+}
+
+@media (max-width: 580px) {
+  .page-contact-wrapper #contact {
+    padding-top: 110px;
+    padding-bottom: 40px;
+  }
 }
 
 .form-banner {
@@ -2771,9 +2822,37 @@ button.fsubmit:disabled {
   .contact-wrap {
     grid-template-columns: 1fr;
   }
+
+  /* Reduce section vertical padding on tablet */
+  #what, #how, #why, #work { padding: 72px 5%; }
+  .inhouse-section { padding: 64px 5%; }
+  #contact { padding: 72px 5%; }
 }
 
 @media (max-width: 580px) {
+  /* ── Nav: tighter spacing so logo + menu + button all fit on small phones ── */
+  nav { padding: 0 3% 0 4%; }
+  .nav-right { gap: 12px; }
+  .nav-right a.nav-btn {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+
+  /* ── Home hero: account for fixed header (42px bar + 64px nav = 106px) ── */
+  #hero { padding: 116px 5% 52px; min-height: 100svh; }
+
+  /* ── Home sections: reduce excess vertical whitespace ── */
+  #what, #how, #why, #work { padding: 56px 5%; }
+  .sec-center { margin-bottom: 36px; }
+  .inhouse-section { padding: 52px 5%; }
+  #contact { padding: 56px 5%; }
+
+  /* ── Inner-page hero headers: tight but safe padding above fixed header ── */
+  .sp2-header-inner { padding: 112px 5% 40px; }
+  .ab-hero-inner    { padding: 112px 5% 48px; }
+  .pf-header-inner  { padding: 112px 5% 40px; }
+  .tm-hero-inner    { padding: 112px 5% 40px; }
+
   .services-grid,
   .why-grid,
   .work-grid {
@@ -2799,4 +2878,13 @@ button.fsubmit:disabled {
   .hero-h1 {
     letter-spacing: -1px;
   }
+
+  /* Steps grid stacked on small phones */
+  .steps { grid-template-columns: 1fr; }
+}
+
+/* ── Extra-small phones (≤360px): hide Get Quote button to prevent overflow ── */
+@media (max-width: 360px) {
+  .nav-right a.nav-btn { display: none; }
+  nav { padding: 0 3%; }
 }

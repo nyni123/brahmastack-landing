@@ -26,7 +26,6 @@ export const metadata: Metadata = {
 
 /**
  * Dedicated contact route (same form block as home).
- * @author Cursor
  */
 export default function ContactPage() {
   return (
