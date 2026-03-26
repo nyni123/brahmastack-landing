@@ -41,6 +41,19 @@ function buildEmailBody(fields: Record<string, string>) {
  * POST /api/send-enquiry — receives form data as JSON, sends email via SMTP.
  */
 export async function POST(req: NextRequest) {
+  // Guard: fail fast with a clear log if any required env var is missing.
+  // On Vercel these must be added in Project → Settings → Environment Variables.
+  const missingVars = (["SMTP_HOST", "SMTP_USER", "SMTP_PASS", "SMTP_FROM"] as const).filter(
+    (key) => !process.env[key]
+  );
+  if (missingVars.length > 0) {
+    console.error("[send-enquiry] Missing env vars:", missingVars.join(", "));
+    return NextResponse.json(
+      { success: false, message: "Server configuration error. Please contact us directly at contact@brahmastack.com" },
+      { status: 500 }
+    );
+  }
+
   try {
     const body = await req.json();
     const { name, email, phone, service, details } = body as Record<string, string>;
@@ -72,6 +85,9 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Verify SMTP connection before attempting to send
+    await transporter.verify();
+
     await transporter.sendMail({
       from:    `"BrahmaStack Website" <${process.env.SMTP_FROM}>`,
       to:      process.env.CONTACT_TO ?? "contact@brahmastack.com",
@@ -80,6 +96,8 @@ export async function POST(req: NextRequest) {
       text,
       html,
     });
+
+    console.log(`[send-enquiry] Email sent successfully to ${process.env.CONTACT_TO} from ${name} <${email}>`);
 
     return NextResponse.json({
       success: true,
