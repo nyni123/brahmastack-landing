@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import { SiteShell } from "@/components/SiteShell";
 import "./globals.css";
 
@@ -144,6 +145,29 @@ export default function RootLayout({
         />
         <SiteShell>{children}</SiteShell>
       </body>
+
+      {/*
+       * Google Ads Global Site Tag (gtag.js) — AW-17982326689
+       * Placed at root layout level so it loads on every route exactly once.
+       * next/script deduplicates across navigations automatically.
+       * @author Cursor
+       */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-17982326689"
+        strategy="afterInteractive"
+      />
+      <Script
+        id="google-ads-config"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-17982326689');
+          `,
+        }}
+      />
     </html>
   );
 }
